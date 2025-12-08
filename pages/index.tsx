@@ -301,7 +301,7 @@ export default function Home() {
       setLog(
         (prev) =>
           prev +
-          `CURRENT CONFIGURATION:\n PRIVILEGE CAN EITHER BE user OR admin\n ASSIGNED THROUGH writeUserData (username, password, privilege?, uid?)\n`
+          `CURRENT CONFIGURATION:\n PRIVILEGE CAN EITHER BE user OR admin\n ASSIGNED THROUGH GLOBAL\n FLAGS HIGHLIGHTED BY {}\n`
       );
     } else if (command === "CLEAR") {
       setLog("");
