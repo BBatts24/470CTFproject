@@ -1,15 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { useEffect } from "react";
 
 export default function NotFound() {
-
-  useEffect(() => {
-    console.log("404 Error: Page not found");
-    console.log("Incorrect sensitive data:")
-    console.log("FLAG:{EXCEPTIONALcondition}");
-  }, []);
-
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 text-center px-5">
       <h1 className="text-6xl font-bold mb-5 text-gray-800">404 - Page Not Found</h1>

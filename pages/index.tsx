@@ -129,8 +129,11 @@ export default function Home() {
         setCorrectFlags(correctFlags + 1);
         setLog(
           (prev) =>
-            prev + `FLAG ACCEPTED\n${5 - correctFlags} FLAGS REMAINING\n`
+            prev + `FLAG ACCEPTED\n${5 - correctFlags - 1} FLAGS REMAINING\n`
         );
+        if (correctFlags === 5) {
+          setLog((prev) => prev + "ALL FLAGS COLLECTED! CONGRATULATIONS!\n");
+        }
       } else {
         setLog((prev) => prev + "FLAG REJECTED\n");
       }
@@ -296,7 +299,7 @@ export default function Home() {
     } else if (command.startsWith("HINT ")) {
       const hintNumber = command.slice(5);
       const hints: Record<string, string> = {
-        "1": "HINT 1: What is found must be found in what is not found.",
+        "1": "HINT 1: There are files your not supposed to see",
         "2": "HINT 2: Admins get to know the super secret data.",
         "3": "HINT 3: Punch the hash until it breaks.",
         "4": "HINT 4: You have been user and admin, but not ...",
