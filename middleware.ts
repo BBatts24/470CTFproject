@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  // Only redirect https to http for 404 pages
+  if (request.nextUrl.pathname === '/404' && request.nextUrl.protocol === 'https:') {
+    const url = request.nextUrl.clone();
+    url.protocol = 'http:';
+    return NextResponse.redirect(url);
+  }
+  
   const response = NextResponse.next();
   
   // Add custom headers for 404 pages
