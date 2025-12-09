@@ -48,32 +48,6 @@ export default function Home() {
       for (let i = 0; i < 8; i++) {
         randomPass += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-      console.log("INFO");
-      console.log("Boot successful.");
-      console.log("Preliminary access necessary.");
-      console.log("LOGS");
-      console.log("LOGs");
-      console.log("LOgs");
-      console.log("Logs");
-      console.log("logs");
-      console.log("LOG");
-      console.log("LOg");
-      console.log("Log");
-      console.log("log");
-      console.log("Character Set: ", chars);
-      console.log("Password Length: 8");
-      console.log("Total Combinations: ", Math.pow(chars.length, 8));
-      console.log(
-        "super secret ultimate password generated successfully: ",
-        randomPass
-      );
-      console.log("data");
-      console.log("testing");
-      console.log("stuff");
-      console.log("more stuff");
-      console.log("successfull things");
-      console.log("great progress");
-      console.log("logging info");
       return randomPass;
     };
 
@@ -185,6 +159,9 @@ export default function Home() {
           setLog((prev) => prev + item + "\n");
         }
       }
+    } else if (user?.privilege !== "admin" && user?.privilege !== "user") {
+      setLog((prev) => prev + "ERROR: UNKNOWN PRIVILEGE LEVEL\n");
+      setLog((prev) => prev + "LOST DATA: FLAG:{unknownPRIV}\n");
     }
   }
 
@@ -215,7 +192,7 @@ export default function Home() {
     }
   };
 
-  const handleSubmit2 = (e:any) => {
+  const handleSubmit2 = (e: any) => {
     e.preventDefault();
     if (!username) {
       setUsername(inputValue);
@@ -256,7 +233,7 @@ export default function Home() {
     }
   };
 
-  async function handleCommand(e:any) {
+  async function handleCommand(e: any) {
     e.preventDefault();
     const command = inputValue.trim();
     if (command === "HELP") {
@@ -315,6 +292,20 @@ export default function Home() {
         checkFLag(flag);
       } else {
         setLog((prev) => prev + "ERROR: NO FLAG PROVIDED\n");
+      }
+    } else if (command.startsWith("HINT ")) {
+      const hintNumber = command.slice(5);
+      const hints: Record<string, string> = {
+        "1": "HINT 1: What is found must be found in what is not found.",
+        "2": "HINT 2: Admins get to know the super secret data.",
+        "3": "HINT 3: Punch the hash until it breaks.",
+        "4": "HINT 4: You have been user and admin, but not ...",
+        "5": "HINT 5: When what is not found is found, watch your traffic closely.",
+      };
+      if (hints[hintNumber]) {
+        setLog((prev) => prev + hints[hintNumber] + "\n");
+      } else {
+        setLog((prev) => prev + "ERROR: INVALID HINT NUMBER\n");
       }
     } else {
       setLog(
